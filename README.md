@@ -24,7 +24,7 @@ We connected our back-end to TMDB API which gave us all the tvshows and movie in
 	 - Get show details
 	 - Get reviews for tv show
 	 - Get reviews for movie
-	 - 
+	   
  - Authorization Routes
 	 - Get authorization Token
 
