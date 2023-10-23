@@ -75,11 +75,43 @@ ReviewGram needs python 3 installed to function. Afterwards:
 
  5. Install postgreSQL
     
- 6. Create a database
+ 7. Create postgreSQL databases for prod and test
     
- 8. Create a local env file with the name of the database and its connection uri 
+ 8. Obtain a TMDB API key and bearer token here: [TMDB API](https://developer.themoviedb.org/reference/intro/getting-started)
+    
+ 9. Create a local env file with this variables:
+
+    ```
+    FLASK_DEBUG = True / False
+    JWT_SECRET_KEY = the secret key for generating connecting tokens
+    SQLALCHEMY_DATABASE_URI = the uri of the prod database
+    SQLALCHEMY_TEST_DATABASE_URI = the uri for the testing database
+    TMDB_API_KEY = key for using TMDB
+    TMDB_BEARER_TOKEN = bearer token for using TMDB
+    ```
     	
 
 ## Running
 
-   
+1. To run the app locally you need to first run the migrations that will create the table for the database. Therefore, while running the virtual environment you need to execute this commands:
+
+	```bash
+	flask db init
+	```
+	
+	```bash
+	flask db migrate -m "<custom message>"
+	```
+	
+	```bash
+	flask db upgrade
+	```
+ 
+ 2. To finally run the application
+    
+	```bash
+	flask run
+	```
+
+	This command will run the API in debug mode depending on the value of the FLASK_DEBUG variable on the env file
+    
