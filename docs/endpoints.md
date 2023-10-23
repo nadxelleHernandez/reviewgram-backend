@@ -3,103 +3,13 @@
 | **File** | **Description** | **Path** | **Request Body** | **Error Response** | **Response Body** | **Request Type** |
 | ------ | --------------- | -------- | ---------------- | ------------------ | ----------------- | ----------------- |
 | media_routes | Get images url | /media/image-url |    | {statuscode: 500,Message: “bad request”} | {"configuration": {"base_url": "http://image.tmdb.org/t/p/","poster_sizes": ["w92","w154","w185","w342","w500","w780","original"], "secure_base_url":  "https://image.tmdb.org/t/p/"},"message": "Images url configuration retrieved","statuscode": 200} | GET  |
+| authorization_routes | Get token | /token | { username: username, password: password} | {statuscode: 403, Message: “Unauthorized”} | {statuscode: 201, message: “generated used: token: token}| POST |
+| user_routes | Create User | /users | {name: userName, email: userEmail, username: username,password: password} | {statuscode: 400, Message: “bad request”} | {statuscode: 201, message: “User: {new_user.username} created successfully.”, user: { id: userId, name: userName, email: userEmail, username: user, password: password }} | POST |
+| user_routes | Get User by Id | /users/\<id\> |  | {statuscode: 400, Message: “bad request”} | {statuscode: 200, message: “Successfully retrieved {username}”, user: { id: userId, name: Name, email: userEmail, username: user}} | GET |
+| user_routes | Update User | /users/\<id\> | {name: userName, email: userEmail,} | {statuscode: 400, Message: “bad request”} | {statuscode: 200, message: “Successfully updated {username}”, user: { id: userId, name: userName, email: userEmail, username: user}} | PATCH |
+| user_routes | Delete User | /users/\<id\> |  | {statuscode: 400, Message: “bad request”} | { statuscode: 200, message: “User with id: <id> successfully deleted”} | DELETE |
 
-| auth | Get | /     | {        | {stat   | {statuscode:     | POST |
-| oriz | to  | token |          | uscode: | 201,             |      |
-| atio | ken |       | u        | 403,    |                  |      |
-| n_ro |     |       | sername: |         | message:         |      |
-| utes |     |       | u        | M       | "generetaded     |      |
-|      |     |       | sername, | essage: | used:            |      |
-|      |     |       |          | "       |                  |      |
-|      |     |       | p        | Unautho | token: token}    |      |
-|      |     |       | assword: | rized"} |                  |      |
-|      |     |       | password |         |                  |      |
-|      |     |       |          |         |                  |      |
-|      |     |       | }        |         |                  |      |
-+------+-----+-------+----------+---------+------------------+------+
-| use  | Cre | /     | {name:   | {stat   | {statuscode:     | POST |
-| r_ro | ate | users | u        | uscode: | 201,             |      |
-| utes | U   |       | serName, | 400,    |                  |      |
-|      | ser |       | email:   |         | message: "User:  |      |
-|      |     |       | us       | M       | {ne              |      |
-|      |     |       | erEmail, | essage: | w_user.username} |      |
-|      |     |       | u        | "bad    | created          |      |
-|      |     |       | sername: | re      | successfully.",  |      |
-|      |     |       | u        | quest"} |                  |      |
-|      |     |       | sername, |         | user: {          |      |
-|      |     |       |          |         |                  |      |
-|      |     |       | p        |         | id: userId,      |      |
-|      |     |       | assword: |         |                  |      |
-|      |     |       | p        |         | name: userName,  |      |
-|      |     |       | assword} |         |                  |      |
-|      |     |       |          |         | email:           |      |
-|      |     |       |          |         | userEmail,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | username: user,  |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | password:        |      |
-|      |     |       |          |         | password         |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
-| use  | Get | /us   |          | {stat   | {statuscode:     | GET  |
-| r_ro | U   | ers/\ |          | uscode: | 200,             |      |
-| utes | ser | <id\> |          | 400,    |                  |      |
-|      | by  |       |          |         | message:         |      |
-|      | Id  |       |          | M       | "Successfully    |      |
-|      |     |       |          | essage: | retrieved        |      |
-|      |     |       |          | "bad    | {username}",     |      |
-|      |     |       |          | re      |                  |      |
-|      |     |       |          | quest"} | user: {          |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | id: userId,      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | name: Name,      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | email:           |      |
-|      |     |       |          |         | userEmail,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | username: user   |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
-| use  | Upd | /us   | {name:   | {stat   | {statuscode:     | P    |
-| r_ro | ate | ers/\ | u        | uscode: | 200,             | ATCH |
-| utes | u   | <id\> | serName, | 400,    |                  |      |
-|      | ser |       | email:   |         | message:         |      |
-|      |     |       | us       | M       | "Successfully    |      |
-|      |     |       | erEmail, | essage: | updated          |      |
-|      |     |       |          | "bad    | {username}",     |      |
-|      |     |       | }        | re      |                  |      |
-|      |     |       |          | quest"} | user: {          |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | id: userId,      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | name: userName,  |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | email:           |      |
-|      |     |       |          |         | userEmail,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | username: user   |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
-| use  | Del | /us   |          | {stat   | { statuscode:    | DE   |
-| r_ro | ete | ers/\ |          | uscode: | 200,             | LETE |
-| utes | u   | <id\> |          | 400,    |                  |      |
-|      | ser |       |          |         | message: "User   |      |
-|      |     |       |          | M       | with id: \<id\>  |      |
-|      |     |       |          | essage: | successfully     |      |
-|      |     |       |          | "bad    | deleted"         |      |
-|      |     |       |          | re      |                  |      |
-|      |     |       |          | quest"} | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
+
 | use  | Get | /     |          | {stat   | {statuscode:     | GET  |
 | r_ro | u   | users |          | uscode: | 200,             |      |
 | utes | ser | /\<id |          | 400,    |                  |      |
