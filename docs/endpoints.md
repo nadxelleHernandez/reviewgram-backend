@@ -17,101 +17,10 @@
 | media_routes | Get top movies | /media/top/movies |  | { statuscode: 400, Message: “bad request” } | { "message": "Top movies retrieved from TMDB", "movies": \[ {"TMDB_id": id, "isMovie": true, "original_language": language, "overview": briefSummary, "poster_url": url, "rating": 0.0-10.0, "release_date": date, "title": movieTitle, "vote_count": int }, { \<\<another top movie\>\> } \] } | GET |
 | media_routes | Get top TV shows | media/top/tvshows |  | { statuscode: 400, Message: “bad request” } | { "message": "Top TV shows retrieved from TMDB", "statuscode": 200, "tvshows": \[ {"TMDB_id": id, "first_air_date": date, "isMovie": false, "name": "Bodies", "origin_country": \[Country1, Country2\], "original_language": language, "overview": briefSummary, "poster_url":url, "rating": 0.0-10.0}, { \<\<another top tvshow \>\> } \] } | GET | 
 | media_route | Get TV Show by Id | media/tv/\<TMDB_id\> |  | { statuscode: 400, Message: “bad request” } | {"message": "TV show with id: \<TMDB_id\> retrieved from TMDB", "statuscode": 200, "tvshow": {"TMDB_id": id, "episode_runtime": [], "first_air_date": date, "genres": \[Genre1,Genre2\], "isMovie": false, "last_air_date": date, "name": tvShowName, "number_of_episodes": int, "number_of_seasons": int, "origin_country": \[country1, country2\], "original_language": language, "overview": briefSummary, "poster_url": url, "providers": [], "rating": 0.0-10.0,  status:(Rumored, Planned, In Production, Post Production, Released, Cancelled), "vote_count": int} } | GET |
+| media_routes | Get TV shows reviews | media/tv/\<TMDB_id\>/reviews | { statuscode: 400, Message: “bad request” } | { "media": {"TMDB_id": "100088", "id": null, "isMovie": false, "title": null},  reviews: \[ { user: {id: userId, username: username }, content: theReview, created: dateCreated, rating: 1.0-10.0, updated: dateUpdated, fromTMDB: true/false}, { <<another review>> } \], "message": "Reviews for tvshow with id: \<TMDB_id\>  retrieved Successfully",  "statuscode": 200 } | GET |
+| user_routes | Get watchlist for user | /users/\<user_id\>/watchlist |  | { statuscode: 500, message: ‘server error’ } | {"message": "Successfully getting \<username\> watchlist.", "statuscode": 200, "watchlist": \[ { "id": int, "media": { "TMDB_id": id, "isMovie": true, "original_language": "en", "overview": BriefSummary, "poster_url": url, "rating": 8.425, "release_date": date, "title": Title, "vote_count": 4609 },  "user": {"id": int, "username": username }, "watched": false }, { \<\<Another entry \>\> } \] } | GET |
+| user_routes | Get watched list for user | /users/\<user_id\>/watched |  | { statuscode: 500, message: ‘server error’ } | {"message": "Successfully getting \<username\> watchlist.", "statuscode": 200, "watched": \[ { "id": int, "media": { "TMDB_id": id, "isMovie": true, "original_language": "en", "overview": BriefSummary, "poster_url": url, "rating": 8.425, "release_date": date, "title": Title, "vote_count": 4609 },  "user": {"id": int, "username": username }, "watched": true }, { \<\<Another entry \>\> } \] } | GET |
 
-| medi | Get | med   |          | {stat   | {statuscode:     | GET  |
-| a_ro | TV  | ia/tv |          | uscode: | 200,             |      |
-| utes | s   | /\<id |          | 400,    |                  |      |
-|      | how | \>/re |          |         | message: "TV     |      |
-|      | r   | views |          | M       | show \<name\>    |      |
-|      | evi |       |          | essage: | reviews          |      |
-|      | ews |       |          | "bad    | retrieved        |      |
-|      |     |       |          | re      | successfully.",  |      |
-|      |     |       |          | quest"} |                  |      |
-|      |     |       |          |         | id : tv_id,      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | reviews: \[ {    |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | user: {id:       |      |
-|      |     |       |          |         | userId           |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | username:        |      |
-|      |     |       |          |         | username },      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | content:         |      |
-|      |     |       |          |         | theReview,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | created:         |      |
-|      |     |       |          |         | dateCreated,     |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | rating:          |      |
-|      |     |       |          |         | 1.0-10.0,        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | updated:         |      |
-|      |     |       |          |         | dateUpdated,     |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | fromTMDB:        |      |
-|      |     |       |          |         | true/false       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | } { \<\<another  |      |
-|      |     |       |          |         | review\>\>       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | } \]             |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
-|      | *   |       |          |         |                  |      |
-|      | *Wa |       |          |         |                  |      |
-|      | tch |       |          |         |                  |      |
-|      | lis |       |          |         |                  |      |
-|      | t** |       |          |         |                  |      |
-+------+-----+-------+----------+---------+------------------+------+
-|      | wat | /us   |          |         | {\"message\":    | GET  |
-|      | chl | ers/\ |          |         | \"Successfully   |      |
-|      | ist | <id\> |          |         | getting          |      |
-|      | by  | /watc |          |         | \<username\>     |      |
-|      | u   | hlist |          |         | watchlist.\",    |      |
-|      | ser |       |          |         |                  |      |
-|      |     |       |          |         | \"statuscode\":  |      |
-|      |     |       |          |         | 200,             |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"watchlist\":   |      |
-|      |     |       |          |         | \[{              |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"id\": 2,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"media\": {     |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"TMDB_id\": id, |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"id\": 4,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"is_movie\":    |      |
-|      |     |       |          |         | false,           |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"title\": \"The |      |
-|      |     |       |          |         | Last of Us\"     |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | },               |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"user\": {      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"id\": 1,       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"username\":    |      |
-|      |     |       |          |         | \"user\"         |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | },               |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"watched\":     |      |
-|      |     |       |          |         | false            |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }, {\<another    |      |
-|      |     |       |          |         | entry\>}         |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \]               |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
 |      | W   | /     |          |         | {\"message\":    | GET  |
 |      | atc | users |          |         | \"Successfully   |      |
 |      | hed | /\<id |          |         | getting          |      |
