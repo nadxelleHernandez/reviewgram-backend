@@ -29,7 +29,7 @@ We connected our back-end to TMDB API which gave us all the tvshows and movie in
 	 - Get authorization Token
 
 ## Endpoints Definition table
-To see a more detailed definition of each endpoint you can consult this document [Endpoint Definition](/docs/Endpoints.docx)
+To see a more detailed definition of each endpoint you can consult this document [Endpoints Definition](/docs/endpoints.md)
 
 ## Technology used
 This back-end has been entirely programmed in ***Python***, using ***flask*** and ***SQLAlchemy***. The database used is ***Postgres***.
