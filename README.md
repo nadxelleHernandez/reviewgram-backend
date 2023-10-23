@@ -1,6 +1,5 @@
 # ReviewGram - backend
 Repo for backend of reviewgram - a full stack webAPI for finding reviews and ratings of TV shows and movies, and keep your own watchlists
-
  
 ## Feature Set
 
@@ -33,3 +32,54 @@ To see a more detailed definition of each endpoint you can consult this document
 
 ## Technology used
 This back-end has been entirely programmed in ***Python***, using ***flask*** and ***SQLAlchemy***. The database used is ***Postgres***.
+
+## Configuration and installation for local running
+
+ReviewGram needs python 3 installed to function. Afterwards:
+
+1. Create a virtual environment for python
+
+	### MacOS
+   
+	```bash
+	python3 -m venv venv
+	```
+ 
+	### Windows
+
+	```powershell
+	python -m venv c:\path\to\myenv
+	```
+
+2. Activate the virtual environment
+   
+	### MacOS
+   
+	```bash
+	source venv/bin/activate
+	```
+ 
+	### Windows
+
+	```powershell
+	/venv/Scripts/Activate.ps1
+	```
+
+
+4. Install dependencies
+	### MacOS and Windows
+   
+	```bash
+	pip install -r requirements.txt
+	```
+
+ 5. Install postgreSQL
+    
+ 6. Create a database
+    
+ 8. Create a local env file with the name of the database and its connection uri 
+    	
+
+## Running
+
+   
