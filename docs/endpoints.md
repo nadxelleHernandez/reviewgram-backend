@@ -11,116 +11,13 @@
 | user_routes | Get user reviews | /users/\<id\>/reviews |  | {statuscode: 400, Message: “bad request”} | { statuscode: 200, message: “User \<username\> reviews retrieved successfully.”, data: {  user: { userId: userId, username: username} , reviews: \[ { media: { id: TMDB_id, title: mediaTitle,    isMovie: true/false content: theReview, created: dateCreated, rating: 1.0-10.0, updated: dateUpdated, fromTMDB:false} { \<\<another review\>\> } \] } } | GET |
 | user_routes | Add media review | /users/\<id\>/reviews |  { media: { TMDB_id: TMDB_id , isMovie: true/false, title: mediaTitle } content: theReview, rating: 1.0-10.0, } | {statuscode: 400, Message: “bad request”} | { statuscode: 201, message: “Success creating review for user id: media id: ”, data: { user: { id: userId, username: username }, media: { id: TMDB_id, title: mediaTitle,    isMovie: true/false}, content: theReview, created: dateCreated, rating: 1.0-10.0, updated: dateUpdated, fromTMDB: false } | POST |
 | user_routes | Update media review | /users/\<id\>/reviews | { media: { TMDB_id: TMDB_id , isMovie: true/false, title: mediaTitle } content: theReview, rating: 1.0-10.0, } | {statuscode: 400, Message: “bad request”} | { statuscode: 201, message: “Success creating review for user id: media id: ”, data: { user: { id: userId, username: username }, media: { id: TMDB_id, title: mediaTitle, isMovie: true/false},  content: theReview, created: dateCreated, rating: 1.0-10.0, updated: dateUpdated, fromTMDB: false } | PATCH |
-| media_routes | Get a movie by id | /media/movies/\<TMDB_id\> |  | { statuscode: 500, message: ‘server error’ } | { statuscode: 200, message: “Movie \<name\> retrieved successfully.”,  movie: { TMDB_id: MovieId, title: movieTitle, overview: briefsummary, rating: 1.0-10.0, genres: \[ genre1, genre2, genre3\], posterUrl: (img url), original_language: language, runtime: (num minutes), status: (Rumored, Planned, In Production, Post Production, Released, Cancelled), release_date: date } } | GET |
+| media_routes | Get a movie by id | /media/movies/\<TMDB_id\> |  | { statuscode: 500, message: ‘server error’ } | { statuscode: 200, message: "Movie with id: \<TMDB_id\> retrieved from TMDB",  movie: { TMDB_id: MovieId, title: movieTitle, overview: briefsummary, rating: 1.0-10.0, genres: \[ genre1, genre2, genre3\], posterUrl: (img url), original_language: language, runtime: (num minutes), status: (Rumored, Planned, In Production, Post Production, Released, Cancelled), release_date: date } } | GET |
 | media_routes | Get movie reviews | /media/movies/\<TMDB_id\>/reviews |  | { statuscode: 400, Message: “bad request” } | {statuscode: 200, message: “Movie \<name\> reviews retrieved successfully.”,  media : { id: id,  is_movie: false,  TMDB_id: tmdb_id,  “Title”: title }, reviews: \[ { user: {id: userId, username: username }, content: theReview, created: dateCreated, rating: 1.0-10.0, updated: dateUpdated, fromTMDB: true/false}, { \<\<another review\>\> } \]} | GET |
-| media_routes | Search Media | /media/search | { query: titleToSearch } | { statuscode: 400, Message: “bad request” } | { data: \[ {TMDB_id: id,  first_air_date: date,  isMovie: false,  name: tvshowName, origin_country: \[ country1, country2 \],  original_language: language,  overview: BriefDescription,  poster_url: url, rating: 0-10.0 },  {TMDB_id: id,  release_date: date,  isMovie: true,  title: movieName,   original_language: language,  overview: BriefDescription,  poster_url: url, rating: 0-10.0, vote_count: int }, { \<\<another media search result\>\> } \] } | POST |
-| media_routes | Get top movies | /media/top/movies |  | { statuscode: 400, Message: “bad request” } | { "message": "Top movies retrieved from TMDB", "movies": \[ {"TMDB_id": id, "isMovie": true, "original_language": language, "overview": BriefDescription, "poster_url": url, "rating": 0.0-10.0, "release_date": date, "title": movieTitle, "vote_count": int }, { \<\<another top movie\>\> } \] } | GET |
-| media_routes | Get top TV shows | media/top/tvshows |  | { statuscode: 400, Message: “bad request” } | { "message": "Top TV shows retrieved from TMDB", "statuscode": 200, "tvshows": \[ {"TMDB_id": id, "first_air_date": date, "isMovie": false, "name": "Bodies", "origin_country": /[Country1, Country2/], "original_language": language, "overview": BriefDescription, "poster_url":url, "rating": 0.0-10.0}, { \<\<another top tvshow \>\> } \] } | GET |
-| medi | Get | /me   |          |         | {                | GET  |
-| a_ro | top | dia/t |          |         |                  |      |
-| utes | f   | op/tv |          |         | \"message\":     |      |
-|      | ive | shows |          |         | \"Top TV shows   |      |
-|      | tv  |       |          |         | retrieved from   |      |
-|      | sh  |       |          |         | TMDB\",          |      |
-|      | ows |       |          |         |                  |      |
-|      |     |       |          |         | \"statuscode\":  |      |
-|      |     |       |          |         | 200,             |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"tvshows\": {   |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"0\": {         |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"TMDB_id\": id, |      |
-|      |     |       |          |         | \"               |      |
-|      |     |       |          |         | backdrop_path\": |      |
-|      |     |       |          |         | path,            |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"isMovie\":     |      |
-|      |     |       |          |         | false,           |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"name\":        |      |
-|      |     |       |          |         | \"name\",        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"overview\":    |      |
-|      |     |       |          |         | \"brie           |      |
-|      |     |       |          |         | f-description\", |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"poster_path\": |      |
-|      |     |       |          |         | \"path\",        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"rating\": 8.82 |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | },               |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | \"1\":           |      |
-|      |     |       |          |         | {\<next_tvshow\> |      |
-|      |     |       |          |         | } } }            |      |
-+------+-----+-------+----------+---------+------------------+------+
-| medi | Get | media |          |         | {statuscode:     | GET  |
-| a_ro | TV  | /tv/\ |          |         | 200,             |      |
-| utes | Sh  | <id\> |          |         |                  |      |
-|      | ows |       |          |         | message: "TV     |      |
-|      | by  |       |          |         | show \<name\>    |      |
-|      | id  |       |          |         | retrieved        |      |
-|      |     |       |          |         | successfully.",  |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | tvshow: {        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | id: tvshowId,    |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | name:            |      |
-|      |     |       |          |         | tvshowName,      |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | overview:        |      |
-|      |     |       |          |         | briefsummary,    |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | rating:          |      |
-|      |     |       |          |         | 1.0-10.0,        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | genres: \[       |      |
-|      |     |       |          |         | genre1, genre2,  |      |
-|      |     |       |          |         | genre3\],        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | poster_url: (img |      |
-|      |     |       |          |         | url),            |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | or               |      |
-|      |     |       |          |         | iginal_language: |      |
-|      |     |       |          |         | language,        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | episode_runtime: |      |
-|      |     |       |          |         | \[ \]            |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | num              |      |
-|      |     |       |          |         | ber_of_episodes: |      |
-|      |     |       |          |         | \<number\>       |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | nu               |      |
-|      |     |       |          |         | mber_of_seasons: |      |
-|      |     |       |          |         | seasons          |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | status:          |      |
-|      |     |       |          |         | (Rumored,        |      |
-|      |     |       |          |         | Planned, In      |      |
-|      |     |       |          |         | Production, Post |      |
-|      |     |       |          |         | Production,      |      |
-|      |     |       |          |         | Released,        |      |
-|      |     |       |          |         | Canceled)        |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | first_air_date:  |      |
-|      |     |       |          |         | date,            |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | last_air_date:   |      |
-|      |     |       |          |         | date             |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | providers: \[    |      |
-|      |     |       |          |         | netflix, appleTV |      |
-|      |     |       |          |         | \]               |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-|      |     |       |          |         |                  |      |
-|      |     |       |          |         | }                |      |
-+------+-----+-------+----------+---------+------------------+------+
+| media_routes | Search Media | /media/search | { query: titleToSearch } | { statuscode: 400, Message: “bad request” } | { data: \[ {TMDB_id: id,  first_air_date: date,  isMovie: false,  name: tvshowName, origin_country: \[ country1, country2 \],  original_language: language,  overview: briefSummary,  poster_url: url, rating: 0-10.0 },  {TMDB_id: id,  release_date: date,  isMovie: true,  title: movieName,   original_language: language,  overview: briefSummary,  poster_url: url, rating: 0-10.0, vote_count: int }, { \<\<another media search result\>\> } \] } | POST |
+| media_routes | Get top movies | /media/top/movies |  | { statuscode: 400, Message: “bad request” } | { "message": "Top movies retrieved from TMDB", "movies": \[ {"TMDB_id": id, "isMovie": true, "original_language": language, "overview": briefSummary, "poster_url": url, "rating": 0.0-10.0, "release_date": date, "title": movieTitle, "vote_count": int }, { \<\<another top movie\>\> } \] } | GET |
+| media_routes | Get top TV shows | media/top/tvshows |  | { statuscode: 400, Message: “bad request” } | { "message": "Top TV shows retrieved from TMDB", "statuscode": 200, "tvshows": \[ {"TMDB_id": id, "first_air_date": date, "isMovie": false, "name": "Bodies", "origin_country": \[Country1, Country2\], "original_language": language, "overview": briefSummary, "poster_url":url, "rating": 0.0-10.0}, { \<\<another top tvshow \>\> } \] } | GET | 
+| media_route | Get TV Show by Id | media/tv/\<TMDB_id\> |  | { statuscode: 400, Message: “bad request” } | {"message": "TV show with id: \<TMDB_id\> retrieved from TMDB", "statuscode": 200, "tvshow": {"TMDB_id": id, "episode_runtime": [], "first_air_date": date, "genres": \[Genre1,Genre2\], "isMovie": false, "last_air_date": date, "name": tvShowName, "number_of_episodes": int, "number_of_seasons": int, "origin_country": \[country1, country2\], "original_language": language, "overview": briefSummary, "poster_url": url, "providers": [], "rating": 0.0-10.0,  status:(Rumored, Planned, In Production, Post Production, Released, Cancelled), "vote_count": int} } | GET |
+
 | medi | Get | med   |          | {stat   | {statuscode:     | GET  |
 | a_ro | TV  | ia/tv |          | uscode: | 200,             |      |
 | utes | s   | /\<id |          | 400,    |                  |      |
